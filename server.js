@@ -8,7 +8,7 @@
  *
  * Name: Karanbeer Chanana            Student ID: 147884225        Date: October 15, 2024
  *
- * Published URL: https://web322-a3-l5lxolx76-karanbeerchananas-projects.vercel.app/
+ * Published URL: web322-a3-beryl.vercel.app
  *
  ********************************************************************************/
 
