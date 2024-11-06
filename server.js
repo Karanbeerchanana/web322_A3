@@ -8,7 +8,7 @@
  *
  * Name: Karanbeer Chanana            Student ID: 147884225        Date: October 15, 2024
  *
- * Published URL: https://assignment3-navy.vercel.app/
+ * Published URL: https://web322-a3-l5lxolx76-karanbeerchananas-projects.vercel.app/
  *
  ********************************************************************************/
 
@@ -18,6 +18,7 @@ const projectData = require("./modules/projects");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + "/public"));
 app.set("views", __dirname + "/views");
@@ -29,12 +30,12 @@ projectData
 
     //Home page
     app.get("/", (req, res) => {
-      res.sendFile(path.join(__dirname, "/views/home.html"));
+      res.render("home");
     });
 
     //About page
     app.get("/about", (req, res) => {
-      res.sendFile(path.join(__dirname, "/views/about.html"));
+      res.render("about");
     });
 
     app.get("/solutions/projects", (req, res) => {
@@ -45,18 +46,18 @@ projectData
           .getProjectsBySector(sector)
           .then((projects) => {
             if (projects.length > 0) {
-              res.json(projects);
+              res.render("projects", {projects: projects});
             } else {
               res
                 .status(404)
-                .send("No projects found for the specified sector.");
+                .render("404", {message: `No projects found for sector: ${sector}`});
             }
           })
-          .catch((error) => res.status(404).send(error));
+          .catch((error) => res.status(404).render("404", {message: `No projects found for sector: ${sector}`}));
       } else {
         projectData
           .getAllProjects()
-          .then((projects) => res.json(projects))
+          .then((projects) => res.render("projects", {projects: projects}))
           .catch((error) => res.status(500).send(error));
       }
     });
@@ -67,18 +68,18 @@ projectData
       projectData
         .getProjectById(projectId)
         .then((project) => {
-          if (project) {
-            res.json(project);
+          if (project) {            
+            res.render("project", {project: project});
           } else {
-            res.status(404).send("Project not found.");
+            res.status(404).render("404", {message: "Unable to find requested project"});
           }
         })
-        .catch((error) => res.status(404).send(error));
+        .catch((error) => res.render("404", {message: "Unable to find requested project"}));
     });
 
     // 404 Error Page
     app.use((req, res) => {
-      res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
+      res.status(404).render("404", {message: "I'm sorry, we're unable to find what you're looking for"});
     });
 
     app.listen(PORT, () => {
