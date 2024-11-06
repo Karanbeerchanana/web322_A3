@@ -1,7 +1,7 @@
 {
-  "name": "assignment2",
+  "name": "assignment3",
   "version": "1.0.0",
-  "description": "Assignment 2",
+  "description": "Assignment 3",
   "main": "server.js",
   "scripts": {
     "tw:build": "tailwindcss build -i ./public/css/tailwind.css -o ./public/css/main.css",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "daisyui": "^4.12.13",
+    "ejs": "^3.1.10",
     "express": "^4.21.0"
   },
   "devDependencies": {
