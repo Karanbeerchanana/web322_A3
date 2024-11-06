@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body tabindex="-1">
+
+    <%- include('partials/navbar', {page:"/solutions/projects"}) %> 
+
+    <br>
+
+    <div class="container mx-auto">
+
+
+      <div class="hero rounded-lg p-6">
+        <div class="hero-content text-center">
+            <div class="max-w-md">
+                <h1 class="text-5xl font-bold">Projects</h1>
+                <p class="py-6">Browse the current list of Projects in our database. Click the theme to filter by sectors such as:</p>                              
+                <a href="/solutions/projects?sector=industry" class="btn btn-primary mt-6">Industry</a>                
+                <a href="/solutions/projects?sector=transportation" class="btn btn-primary mt-6">Transportation</a>                
+                <a href="/solutions/projects?sector=electricity" class="btn btn-primary mt-6">Electricity</a>                
+            </div>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table table-xs table-pin-rows table-pin-cols">
+          <tbody>
+            <% projects.forEach(projects=>{ %>
+              <tr>
+                <td><%= projects.title %></td>                
+                <td><a href="/solutions/projects?sector=<%= projects.sector %> " class="btn btn-primary mt-6"><%= projects.sector %></a></td>
+                <td><%= projects.summary_short %></td>                
+                <td><a href="/solutions/projects/<%= projects.id %>" class="btn btn-primary mt-6">Details</a></td>
+              </tr>
+            <% }) %>            
+          </tbody>          
+        </table>
+      </div>
+
+    </div>
+
+</body>
+</html>
+            
